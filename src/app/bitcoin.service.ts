@@ -21,6 +21,7 @@ interface Response {
 export class BitcoinService {
   current: Response;
   list: Array<Response> = [];
+  private timer: any;
 
   constructor(private http: HttpClient) {}
 
@@ -31,5 +32,27 @@ export class BitcoinService {
         this.current = data;
         this.list.push(data);
       });
+  }
+  start() {
+    this.http
+      .get<Response>('https://api.coindesk.com/v1/bpi/currentprice/BRL.json')
+      .subscribe((data) => {
+        this.current = data;
+        this.list.push(data);
+      });
+    if (!this.timer) {
+      this.timer = setInterval(() => {
+        this.http
+          .get<Response>(
+            'https://api.coindesk.com/v1/bpi/currentprice/BRL.json'
+          )
+          .subscribe((data) => {
+            if (this.list.bpi.USD.rate_float[this.list.length - 1] == 2) {
+            }
+            this.current = data;
+            this.list.push(data);
+          });
+      }, 60000);
+    }
   }
 }
