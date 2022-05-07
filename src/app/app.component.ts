@@ -1,6 +1,5 @@
 import { Component, VERSION } from '@angular/core';
 import { BitcoinService } from './bitcoin.service';
-import { GithubService } from './github.service';
 
 @Component({
   selector: 'my-app',
@@ -10,17 +9,9 @@ import { GithubService } from './github.service';
 export class AppComponent {
   name = 'HttpClient Demo' + VERSION.major;
 
-  constructor(
-    public gitHubService: GithubService,
-    public bitcoinService: BitcoinService
-  ) {}
+  constructor(public bitcoinService: BitcoinService) {}
 
   ngOnInit() {
-    this.gitHubService.update();
     this.bitcoinService.start();
-  }
-
-  updateBitcoinRates() {
-    this.bitcoinService.update();
   }
 }

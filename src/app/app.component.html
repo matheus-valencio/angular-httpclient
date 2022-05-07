@@ -1,29 +1,20 @@
 <hello name="{{ name }}"></hello>
-<h2>GitHub larguesa's repos</h2>
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-  </tr>
-  <tr *ngFor="let repo of gitHubService.repos">
-    <td>{{ repo.id }}</td>
-    <td>{{ repo.full_name }}</td>
-  </tr>
-</table>
-<hr />
-<h2>
-  BitCoin$ &nbsp; <button (click)="updateBitcoinRates()">Atualizar</button>
-</h2>
+<div class="container">
+  <hr />
+  <h2>BitCoin$</h2>
 
-<table border="1">
-  <tr>
-    <th>Data/Hora</th>
-    <th>USD</th>
-    <th>BRL</th>
-  </tr>
-  <tr *ngFor="let rate of this.bitcoinService.list">
-    <td>{{ rate.time.updated }}</td>
-    <td>{{ rate.bpi.USD.rate_float }}</td>
-    <td>{{ rate.bpi.BRL.rate_float }}</td>
-  </tr>
-</table>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th>Data/Hora</th>
+        <th>USD</th>
+        <th>BRL</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let rate of this.bitcoinService.list">
+      <td>{{ rate.time.updated }}</td>
+      <td>{{ rate.bpi.USD.rate_float }}</td>
+      <td>{{ rate.bpi.BRL.rate_float }}</td>
+    </tr>
+  </table>
+</div>

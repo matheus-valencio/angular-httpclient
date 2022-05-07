@@ -25,14 +25,6 @@ export class BitcoinService {
 
   constructor(private http: HttpClient) {}
 
-  update() {
-    this.http
-      .get<Response>('https://api.coindesk.com/v1/bpi/currentprice/BRL.json')
-      .subscribe((data) => {
-        this.current = data;
-        this.list.push(data);
-      });
-  }
   start() {
     this.http
       .get<Response>('https://api.coindesk.com/v1/bpi/currentprice/BRL.json')
@@ -47,10 +39,11 @@ export class BitcoinService {
             'https://api.coindesk.com/v1/bpi/currentprice/BRL.json'
           )
           .subscribe((data) => {
-            if (this.list.bpi.USD.rate_float[this.list.length - 1] == 2) {
+            if (data.bpi.USD.rate_float == this.current.bpi.USD.rate_float) {
+            } else {
+              this.current = data;
+              this.list.push(data);
             }
-            this.current = data;
-            this.list.push(data);
           });
       }, 60000);
     }
